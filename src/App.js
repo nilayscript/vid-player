@@ -1,4 +1,5 @@
 import PreviewPlayer from "./components/PreviewPlayer";
+import Detail from "./pages/details/Detail";
 import Login from "./pages/login/Login";
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 
@@ -9,6 +10,7 @@ function App() {
           <Routes>
               <Route path="/" element={<Login/>}/>
               <Route path="/preview" element={<PreviewPlayer/>}/>
+              <Route path="/detail" element={<Detail/>}/>
           </Routes>
       </BrowserRouter>
     </div>
