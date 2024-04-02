@@ -2,8 +2,8 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { api } from "../../config";
 import Cookies from "js-cookie";
 
-export const authApi = createApi({
-  reducerPath: "authApi",
+export const homeApi = createApi({
+  reducerPath: "homeApi",
   baseQuery: fetchBaseQuery({
     baseUrl: api,
     prepareHeaders: (headers, { getState }) => {
@@ -14,23 +14,22 @@ export const authApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["auth"],
+  tagTypes: ["home"],
   endpoints: (builder) => ({
     login: builder.mutation({
-      query: (credentials) => ({
-        url: "login",
-        method: "POST",
-        body: credentials,
+      query: () => ({
+        url: "check-current-status",
+        method: "GET",
       }),
     }),
     logout: builder.mutation({
-      query: () => ({
-        url: "logout",
-        method: "POST",
+      query: (documentId) => ({
+        url: "document/" + documentId,
+        method: "GET",
       }),
     }),
   }),
 });
 
-export const { useLoginMutation, useLogoutMutation } = authApi;
-export default authApi;
+export const { useCheckStatusMutation, useDocumentMutation } = homeApi;
+export default homeApi;
