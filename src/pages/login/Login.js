@@ -2,8 +2,24 @@ import React from 'react';
 import banner from '../../assets/banner.png';
 import logo from '../../assets/logo.png';
 import qr from '../../assets/qr.png';
+import { useState } from 'react';
 
 const Login = () => {
+  const [screenId, setScreenId] = useState('');
+  const [screenPassword, setScreenPassword] = useState('');
+
+    const handleLogin = async () => {
+        console.log({
+            username:screenId,
+            password:screenPassword,
+        })
+        // try {
+        
+        // } catch (error) {
+        // console.error('Error during login:', error);
+        // }
+  };
+
   return (
     <div style={{ 
       backgroundImage: `url(${banner})`,
@@ -15,18 +31,30 @@ const Login = () => {
       justifyContent: 'center',
       alignItems: 'center'
     }}>
-        <div className='bg-[rgba(0,0,0,0.8)] w-[28rem] flex flex-col items-center justify-center py-3'>
+        <div className='bg-[rgba(0,0,0,0.8)] w-[28rem] flex flex-col items-center justify-center py-3 rounded-[4px]'>
             <div className='flex  items-center justify-center'>
                 <img src={logo} alt="digisigns"/>
             </div>
             <div className='p-6 w-full'>
                 <h1 className='text-[#D9DADE] text-[20px] font-[700]'>SIGN IN</h1>
                 <div className='flex flex-col gap-2 my-2 w-full'>
-                    <input type="text" placeholder='Screen ID' className='bg-[#333333] opacity-[100%] h-[3rem] p-2 rounded-[4px] placeholder:font-[500] placeholder:text-[15px]'/>
-                    <input type="text" placeholder='Screen Password' className='bg-[#333333] opacity-[100%] h-[3rem] p-2 rounded-[4px] placeholder:font-[500] placeholder:text-[15px]'/>
+                    <input 
+                      type="text" 
+                      placeholder='Screen ID' 
+                      className='focus:outline-none border-none text-[#B3B3B3] bg-[#333333] opacity-[100%] h-[3rem] p-2 rounded-[4px] placeholder:font-[500] placeholder:text-[15px]'
+                      value={screenId}
+                      onChange={(e) => setScreenId(e.target.value)}
+                    />
+                    <input 
+                      type="password" 
+                      placeholder='Screen Password' 
+                      className='bg-[#333333] focus:outline-none border-none text-[#B3B3B3] opacity-[100%] h-[3rem] p-2 rounded-[4px] placeholder:font-[500] placeholder:text-[15px]'
+                      value={screenPassword}
+                      onChange={(e) => setScreenPassword(e.target.value)}
+                    />
                 </div>
                 <div>
-                    <div className='flex items-center justify-center bg-[#E50914] text-white h-[2.8rem] rounded-[4px]'>Sign In</div>
+                    <div onClick={handleLogin} className='cursor-pointer flex items-center justify-center bg-[#E50914] text-white h-[2.8rem] rounded-[4px]'>Sign In</div>
                     <h1 className='text-[10px] text-[#B3B3B3] my-3 font-[400]'>Need help? Connect with us at support@digisigns.in</h1>
                 </div>
             </div>
