@@ -3,22 +3,43 @@ import banner from '../../assets/banner.png';
 import logo from '../../assets/logo.png';
 import qr from '../../assets/qr.png';
 import { useState } from 'react';
+import { useLoginMutation } from '../../redux/services/AuthApi';
+
+import { useNavigate } from "react-router-dom";
+import {Loading3QuartersOutlined} from '@ant-design/icons';
+import Cookies from 'js-cookie';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../../redux/services/Constants';
+import { message } from 'antd';
+import { domain } from '../../config';
 
 const Login = () => {
   const [screenId, setScreenId] = useState('');
   const [screenPassword, setScreenPassword] = useState('');
+  const [login,{isLoading:isLogging}] = useLoginMutation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-    const handleLogin = async () => {
-        console.log({
+  const handleLogin = async () => {
+    try {
+      const result  = await login({
             username:screenId,
             password:screenPassword,
         })
-        // try {
-        
-        // } catch (error) {
-        // console.error('Error during login:', error);
-        // }
-  };
+      console.log(result);
+    //   if(result?.data?.success){
+    //         message.success(result?.data?.message);
+    //         const token = result.data.token;
+    //         Cookies.set('token', token, { domain: domain, expires: 1 });
+    //         dispatch(loginUser());
+    //         navigate('/');
+    //   }else{
+    //         message.error(result?.data?.message);
+    //   }
+      }catch(error){
+        message.error("Some error occured");
+      }
+    };
 
   return (
     <div style={{ 
