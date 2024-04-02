@@ -16,20 +16,22 @@ export const homeApi = createApi({
   }),
   tagTypes: ["home"],
   endpoints: (builder) => ({
-    login: builder.mutation({
-      query: () => ({
-        url: "check-current-status",
-        method: "GET",
-      }),
-    }),
-    logout: builder.mutation({
+    checkStatus: builder.query({
       query: (documentId) => ({
-        url: "document/" + documentId,
-        method: "GET",
-      }),
+				url: "check-current-status",
+				method: "GET",
+			}),
+			providesTags: (result) => (result ? ["home"] : ["home"]),
+    }),
+    getDocument: builder.query({
+      query: (documentId) => ({
+				url: `document/${documentId}`,
+				method: "GET",
+			}),
+			providesTags: (result) => (result ? ["home"] : ["home"]),
     }),
   }),
 });
 
-export const { useCheckStatusMutation, useDocumentMutation } = homeApi;
+export const {useGetDocumentQuery,useCheckStatusQuery} = homeApi;
 export default homeApi;

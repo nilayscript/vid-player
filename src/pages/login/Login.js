@@ -29,7 +29,7 @@ const Login = () => {
       console.log(result);
       if (result?.data?.success) {
         message.success(result?.data?.message);
-        const token = result.data.token;
+        const token = result?.data?.token;
         Cookies.set("token", token, { domain: domain });
         dispatch(loginUser());
         navigate("/home");
